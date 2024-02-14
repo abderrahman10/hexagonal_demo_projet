@@ -1,7 +1,7 @@
 package com.hexagonal.demo.application;
 
-import com.hexagonal.demo.application.DTO.LoginDto;
-import com.hexagonal.demo.domain.Port.AuthenticationService;
+import com.hexagonal.demo.application.dto.LoginDto;
+import com.hexagonal.demo.domain.api.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,12 +20,17 @@ public class AuthController {
 
     private final AuthenticationService authenticationService;
 
+
+
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> login(@RequestBody LoginDto loginDto) {
-        if (authenticationService.authenticateByUserName(loginDto)) {
-            return ResponseEntity.ok(Map.of("message", "Login successful"));
+        String username=loginDto.getUsername();
+        String password=loginDto.getPassword();
+
+        if (authenticationService.authenticate(username,password)) {
+            return ResponseEntity.ok().body("Login successful");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Login failed"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
         }
     }
 }

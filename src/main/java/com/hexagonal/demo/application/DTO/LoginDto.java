@@ -1,4 +1,4 @@
-package com.hexagonal.demo.application.DTO;
+package com.hexagonal.demo.application.dto;
 
 import lombok.Builder;
 import lombok.Data;

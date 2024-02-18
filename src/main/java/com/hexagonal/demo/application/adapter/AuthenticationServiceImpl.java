@@ -14,7 +14,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
  private  final AuthenticationRepository authenticationRepository;
 
     @Override
-    public boolean authenticate(String username, String password) {
+    public boolean login(String username, String password) {
         User user = authenticationRepository.findUserByUserName(username);
 
         return user != null && user.authenticate(username, password);

@@ -27,7 +27,7 @@ public class AuthController {
         String username=loginDto.getUsername();
         String password=loginDto.getPassword();
 
-        if (authenticationService.authenticate(username,password)) {
+        if (authenticationService.login(username,password)) {
             return ResponseEntity.ok().body("Login successful");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
